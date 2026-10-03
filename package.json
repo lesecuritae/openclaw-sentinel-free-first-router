@@ -1,0 +1,44 @@
+{
+  "name": "openclaw-sentinel-free-first-router",
+  "version": "0.1.0",
+  "description": "Config-driven free-first model routing plugin for OpenClaw",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "funding": "https://github.com/lesecuritae/openclaw-sentinel-free-first-router/blob/main/README.en.md#support",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lesecuritae/openclaw-sentinel-free-first-router.git"
+  },
+  "files": [
+    "dist/",
+    "openclaw.plugin.json",
+    "README.md",
+    "README.de.md",
+    "README.en.md",
+    "LICENSE",
+    "docs/assets/readme-hero.svg"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "pack:check": "npm run build && npm pack --dry-run"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.9.7"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ],
+    "compat": {
+      "pluginApi": ">=2026.9.7"
+    },
+    "build": {
+      "openclawVersion": "2026.9.7"
+    }
+  }
+}

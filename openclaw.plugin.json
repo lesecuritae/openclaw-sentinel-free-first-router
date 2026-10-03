@@ -1,0 +1,98 @@
+{
+  "id": "openclaw-sentinel-free-first-router",
+  "name": "OpenClaw Sentinel Free-First Router",
+  "description": "Selects the least costly capable model profile. Voluntary Monero donations for development: see README.",
+  "activation": {
+    "onCapabilities": ["hook"]
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "profiles": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "provider",
+            "model",
+            "maxTier",
+            "costRank"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9_-]{0,31}$"
+            },
+            "provider": {
+              "type": "string",
+              "minLength": 1
+            },
+            "model": {
+              "type": "string",
+              "minLength": 1
+            },
+            "maxTier": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "costRank": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            }
+          }
+        }
+      },
+      "decider": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "endpoint",
+          "model"
+        ],
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model": {
+            "type": "string",
+            "minLength": 1
+          },
+          "apiKeyEnv": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "timeoutMs": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 10000
+          },
+          "maxPromptChars": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20000
+          }
+        }
+      },
+      "minConfidence": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "excludedAgents": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
